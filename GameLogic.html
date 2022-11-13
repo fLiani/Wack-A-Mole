@@ -98,20 +98,18 @@
         document.getElementById(randomMole).style.visibility = "hidden";
         document.getElementById(randomMole).style.top = "100%";
         document.getElementById(randomMole).style.left = "100%";
-    }
-
-    function randMole()
-    {
+        window.setTimeout("showMole()", (Math.random() * 2 + 1) * 1000);
         randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
     }
 
     function StartRound()
     {
         // Start the first round and load the first game target
-        var randomTime = Math.random() * 2 + 1;
         document.getElementById("text").innerHTML = "";
         document.getElementById("round").innerHTML = "Round = 1";
         document.getElementById("score").innerHTML = "Score = 0";
+
+        var randomTime = Math.random() * 2 + 1;
         window.setTimeout("showMole()", randomTime * 1000);
     }
 
