@@ -68,9 +68,9 @@
     <p id="round"></p>
     <p id="score"></p>
 
-    <div id = "10px" class="circle10px"></div>
-    <div id = "30px" class="circle30px"></div>
-    <div id = "50px" class="circle50px"></div>
+    <div id = "10px" class="circle10px" onclick="clicked()"></div>
+    <div id = "30px" class="circle30px" onclick="clicked()"></div>
+    <div id = "50px" class="circle50px" onclick="clicked()"></div>
 </body>
 
 <script type="text/javascript">
@@ -102,12 +102,19 @@
         randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
     }
 
+    function clicked()
+    {
+        score++;
+        document.getElementById("score").innerHTML = "Score = " + score;
+        document.getElementById(randomMole).style.visibility = "hidden";
+    }
+
     function StartRound()
     {
         // Start the first round and load the first game target
         document.getElementById("text").innerHTML = "";
         document.getElementById("round").innerHTML = "Round = 1";
-        document.getElementById("score").innerHTML = "Score = 0";
+        document.getElementById("score").innerHTML = "Score = " + score;
 
         var randomTime = Math.random() * 2 + 1;
         window.setTimeout("showMole()", randomTime * 1000);
