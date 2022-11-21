@@ -80,17 +80,26 @@
     var score = 0;
     let moleArray = ["10px", "30px", "50px"];
     var randomMole;
+    var difficulty = 9;
 
     function showMole()
     {
-        var hideMoleTime = Math.random() * 2 + 1;
-        randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
-        var randTop = Math.random() * 84 + 12;
-        var randLeft = Math.random() * 85 + 12;
-        document.getElementById(randomMole).style.top = randTop + "%";
-        document.getElementById(randomMole).style.left = randLeft + "%";
-        document.getElementById(randomMole).style.visibility = "visible";
-        window.setTimeout("hideMole()", hideMoleTime * 1000);
+        if(round === 61)
+        {
+            document.getElementById("round").innerHTML = "";
+            document.getElementById("score").innerHTML = "";
+            document.getElementById("text").innerHTML = "Game Over, your score was: " + score + "/60";
+        }
+        else
+        {
+            randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
+            var randTop = Math.random() * 84 + 12;
+            var randLeft = Math.random() * 85 + 12;
+            document.getElementById(randomMole).style.top = randTop + "%";
+            document.getElementById(randomMole).style.left = randLeft + "%";
+            document.getElementById(randomMole).style.visibility = "visible";
+            window.setTimeout("hideMole()", difficulty * 1000);
+        }
     }
 
     function hideMole()
@@ -98,23 +107,36 @@
         document.getElementById(randomMole).style.visibility = "hidden";
         document.getElementById(randomMole).style.top = "100%";
         document.getElementById(randomMole).style.left = "100%";
-        window.setTimeout("showMole()", (Math.random() * 2 + 1) * 1000);
-        randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
+        randomMole = null;
+        document.getElementById("centralCircle").style.background = "green";
+        newRound();
     }
 
     function clicked()
     {
         score++;
         document.getElementById("score").innerHTML = "Score = " + score;
+        document.getElementById("round").innerHTML = "Round = " + (round + 1);
+        document.getElementById("centralCircle").style.background = "green";
         document.getElementById(randomMole).style.visibility = "hidden";
+        document.getElementById(randomMole).style.top = "100%";
+        document.getElementById(randomMole).style.left = "100%";
+        randomMole = null;
+    }
+
+    function newRound()
+    {
+        difficulty-= 0.15;
     }
 
     function StartRound()
     {
         // Start the first round and load the first game target
+        round++;
         document.getElementById("text").innerHTML = "";
-        document.getElementById("round").innerHTML = "Round = 1";
+        document.getElementById("round").innerHTML = "Round = " + round;
         document.getElementById("score").innerHTML = "Score = " + score;
+        document.getElementById("centralCircle").style.background = "black";
 
         var randomTime = Math.random() * 2 + 1;
         window.setTimeout("showMole()", randomTime * 1000);
