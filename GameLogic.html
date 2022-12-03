@@ -98,18 +98,15 @@
             document.getElementById(randomMole).style.top = randTop + "%";
             document.getElementById(randomMole).style.left = randLeft + "%";
             document.getElementById(randomMole).style.visibility = "visible";
-            window.setTimeout("hideMole()", difficulty * 1000);
         }
     }
 
     function hideMole()
     {
-        document.getElementById(randomMole).style.visibility = "hidden";
         document.getElementById(randomMole).style.top = "100%";
         document.getElementById(randomMole).style.left = "100%";
-        randomMole = null;
+        document.getElementById(randomMole).style.visibility = "hidden";
         document.getElementById("centralCircle").style.background = "green";
-        newRound();
     }
 
     function clicked()
@@ -117,21 +114,18 @@
         score++;
         document.getElementById("score").innerHTML = "Score = " + score;
         document.getElementById("round").innerHTML = "Round = " + (round + 1);
-        document.getElementById("centralCircle").style.background = "green";
-        document.getElementById(randomMole).style.visibility = "hidden";
-        document.getElementById(randomMole).style.top = "100%";
-        document.getElementById(randomMole).style.left = "100%";
-        randomMole = null;
+        hideMole();
     }
 
     function newRound()
     {
-        difficulty-= 0.15;
+        //difficulty-= 0.15;
     }
 
     function StartRound()
     {
         // Start the first round and load the first game target
+        randomMole = null;
         round++;
         document.getElementById("text").innerHTML = "";
         document.getElementById("round").innerHTML = "Round = " + round;
@@ -139,7 +133,8 @@
         document.getElementById("centralCircle").style.background = "black";
 
         var randomTime = Math.random() * 2 + 1;
-        window.setTimeout("showMole()", randomTime * 1000);
+        setTimeout(showMole, randomTime * 1000);
+        setTimeout(hideMole, 5 * 1000);
     }
 
 </script>
