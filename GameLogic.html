@@ -76,11 +76,11 @@
 <script type="text/javascript">
     
     // Game Logic goes here
-    var round = 0;
-    var score = 0;
+    let round = 0;
+    let score = 0;
     let moleArray = ["10px", "30px", "50px"];
-    var randomMole;
-    var difficulty = 9;
+    let randomMole;
+    let difficulty = 9;
 
     function showMole()
     {
@@ -93,8 +93,8 @@
         else
         {
             randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
-            var randTop = Math.random() * 84 + 12;
-            var randLeft = Math.random() * 85 + 12;
+            const randTop = Math.random() * 84 + 12;
+            const randLeft = Math.random() * 85 + 12;
             document.getElementById(randomMole).style.top = randTop + "%";
             document.getElementById(randomMole).style.left = randLeft + "%";
             document.getElementById(randomMole).style.visibility = "visible";
@@ -107,6 +107,7 @@
         document.getElementById(randomMole).style.left = "100%";
         document.getElementById(randomMole).style.visibility = "hidden";
         document.getElementById("centralCircle").style.background = "green";
+        randomMole = null;
     }
 
     function clicked()
@@ -132,9 +133,9 @@
         document.getElementById("score").innerHTML = "Score = " + score;
         document.getElementById("centralCircle").style.background = "black";
 
-        var randomTime = Math.random() * 2 + 1;
-        setTimeout(showMole, randomTime * 1000);
-        setTimeout(hideMole, 5 * 1000);
+        const randomTime = Math.random() * 2 + 1;
+        setTimeout("showMole()", randomTime * 1000);
+        setTimeout("hideMole()", 5 * 1000);
     }
 
 </script>
