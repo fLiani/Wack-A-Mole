@@ -103,12 +103,14 @@
     // Game Logic goes here
     let round = 0;
     let score = 0;
-    let moleArray = ["10px", "30px", "50px"];
+    let moleArray = [10, 30, 50];
     let randomMole;
     let difficulty = 9;
     let randomTime = 0;
     let randTop = 0;
     let randLeft = 0;
+    //let distnace;
+    let id;
 
     let time10 = 4000;
     let time30 = 3000;
@@ -119,6 +121,15 @@
     function randLocation(){
         randTop = Math.random() * 84 + 12;
         randLeft = Math.random() * 85 + 12;
+    }
+
+    function calculateDistance(){
+        let distance = Math.sqrt(Math.pow(randLeft, 2) + Math.pow(randTop, 2));
+        id = Math.log2((distance / randomMole) + 1)
+        console.log(distance);
+        console.log(randomMole);
+        console.log(id);
+        return(distance);
     }
 
     function showMole()
@@ -136,6 +147,27 @@
             {
                 randLocation();
             }
+            // distance = calculateDistance();
+            // if(round < 20){
+            //     while(distance > 50.00){
+            //         randLocation();
+            //         //console.log(calculateDistance());
+                    
+            //     }
+            // }
+            // if(round < 40 && round >= 20){
+            //     console.log("yes");
+            //     // let temp = calculateDistance();
+            //     while(distance < 50){
+            //         //console.log(temp)
+            //         randLocation();
+            //     }
+            // }
+            // if(round > 40){
+            //     while(distance < 75){
+            //         randLocation();
+            //     }
+            // }
 
             document.getElementById(randomMole).style.top = randTop + "%";
             document.getElementById(randomMole).style.left = randLeft + "%";
@@ -159,6 +191,9 @@
         score++;
         document.getElementById("score").innerHTML = "Score = " + score;
         document.getElementById("round").innerHTML = "Round = " + (round + 1);
+
+        calculateDistance();
+
         if (randomMole !== null)
         {
             document.getElementById(randomMole).style.visibility = "hidden";
@@ -195,7 +230,7 @@
         if(running === false)
         {
             running = true;
-            randomMole = moleArray[Math.floor(Math.random() * moleArray.length)];
+            randomMole = ((moleArray[Math.floor(Math.random() * moleArray.length)]) + "px");
             round++;
             document.getElementById("text").innerHTML = "";
             document.getElementById("round").innerHTML = "Round = " + round;
@@ -217,12 +252,9 @@
             time10-=14;
             time30-=14;
             time50-=14;
+        
         }
     }
-
-    // document.getElementById(moleArray[2]).style.top = "53%";
-    // document.getElementById(moleArray[2]).style.left = "53%";
-    // document.getElementById(moleArray[2]).style.visibility = "visible";
 
 </script>
 
